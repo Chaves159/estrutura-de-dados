@@ -6,18 +6,27 @@ public class Vetor {
 	private int totalDeAlunos = 0;
 
 	public void adiciona(Aluno aluno) {
-		// implementacao
+
+		alunos[this.totalDeAlunos] = aluno;
+		totalDeAlunos++;
 	}
 
 	public void adiciona(int posicao, Aluno aluno) {
-		// implementacao
+		for(int i = totalDeAlunos;i >= posicao;i--){
+			this.alunos[i] = this.alunos[i - 1];
+		}
+		this.alunos[posicao] = aluno;
+		this.totalDeAlunos++;
 		
-		System.out.println("Xablau");
+
 	}
 
 	public Aluno pega(int posicao) {
-		// implementacao
-		return null;
+		if(posicao >= this.totalDeAlunos || posicao < 0){
+			throw new IllegalArgumentException("posicao invalida");
+		}
+
+		return alunos[posicao];
 	}
 
 	public void remove(int posicao) {
@@ -25,8 +34,9 @@ public class Vetor {
 	}
 
 	public boolean contem(Aluno aluno) {
-		for (int i = 0; i < this.totalDeAlunos; i++) {
-			if (aluno == this.alunos[i]) {
+		for(int i = 0; i < this.totalDeAlunos; i++){
+
+			if(alunos[i].equals(aluno)){
 				return true;
 			}
 		}
