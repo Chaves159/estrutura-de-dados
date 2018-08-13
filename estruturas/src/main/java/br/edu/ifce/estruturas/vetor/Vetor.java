@@ -11,6 +11,8 @@ public class Vetor {
 
 	public void adiciona(int posicao, Aluno aluno) {
 		// implementacao
+		
+		System.out.println("Xablau");
 	}
 
 	public Aluno pega(int posicao) {
