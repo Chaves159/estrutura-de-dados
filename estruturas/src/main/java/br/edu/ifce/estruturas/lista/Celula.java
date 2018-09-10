@@ -6,6 +6,8 @@ public class Celula {
 	
 	private Object elemento;
 	
+	private Celula anterior;
+	
 	public Celula(Celula proxima, Object elemento) {
 		this.proxima = proxima;
 		this.elemento = elemento;
@@ -21,6 +23,13 @@ public class Celula {
 	
 	public Celula getProxima() {
 		return proxima;
+	}
+	public void setAnterior(Celula anterior) {
+		this.anterior = anterior;
+	}
+	
+	public Celula getAnterior() {
+		return anterior;
 	}
 	
 	public Object getElemento() {

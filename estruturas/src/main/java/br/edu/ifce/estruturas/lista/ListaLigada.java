@@ -35,11 +35,25 @@ public class ListaLigada {
 	}
 	
 	public void removeDoComeco() {
-		// implementacao
+		
+		this.primeira = this.primeira.getProxima();
+		
+		this.totalDeElementos--;
+		
+		if(this.totalDeElementos == 0) {
+			this.ultima = null;
+		}
+		
+		
 	}
 	
 	public void removeDoFim() {
-		// implementacao
+		if(this.totalDeElementos == 1) {
+			this.removeDoComeco();
+		}
+		this.ultima = this.ultima.getAnterior();
+		this.ultima.setProxima(null);
+		this.totalDeElementos--;
 	}
 	
 	public int tamanho() {
