@@ -6,6 +6,7 @@ public class ListaCircular {
 	
 	private Celula primeira;
 	private Celula ultima;
+	private Celula anterior;
 	
 	private int totalDeElementos;
 	
@@ -19,6 +20,7 @@ public class ListaCircular {
 	
 	public void adicionaNoComeco(Object elemento) {
 		Celula nova = new Celula(this.primeira, elemento);
+		nova.setProxima(primeira);
 		this.primeira = nova;
 		this.ultima.setProxima(primeira);
 		if(this.totalDeElementos == 0) {
