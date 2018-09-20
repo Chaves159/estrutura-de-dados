@@ -55,7 +55,7 @@ public class ConjuntoEspalhamento {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return super.toString();
+		return String.format("[%d]--> %s",this.totalDeElementos,this.tabelaEspalhamento);
 	}
 
 }
