@@ -23,13 +23,14 @@ public class ConjuntoEspalhamento {
 			codigoEspalhamento =	Math.abs(codigoEspalhamento);
 		return codigoEspalhamento %this.tabelaEspalhamento.size();
 	}
-	public void remove(String palavra){
-		if (this.contem(palavra)) {
-			int indice = palavra.toLowerCase().charAt(0)%26;
+	public void remove(Object objeto){
+		if (this.contem(objeto)) {
+			int indice = this.calculaIndiceDaTabela(objeto);
 			List<Object> lista = this.tabelaEspalhamento.get(indice);
-			lista.remove(palavra);
+			lista.remove(objeto);
 			this.totalDeElementos--;
-		}
+			this.verificaCarga();
+			}
 	}
 	public boolean contem (Object objeto){
 		int indice = calculaIndiceDaTabela(objeto);
