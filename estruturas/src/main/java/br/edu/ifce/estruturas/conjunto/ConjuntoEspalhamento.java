@@ -6,51 +6,43 @@ import java.util.List;
 public class ConjuntoEspalhamento {
 	private int totalDeElementos = 0;
 	
-	public ArrayList<LinkedList<String>> tabelaEspalhamento = new ArrayList<LinkedList<String>>();
+	public ArrayList<LinkedList<Object>> tabelaEspalhamento = new ArrayList<LinkedList<Object>>();
 	
-	public int funcaoEspalhamento(String palavra) {
-		return palavra.toLowerCase().charAt(0)%26;
-	}
-	public void adiciona(String palavra){
-		if(!this.contem(palavra)){
-			int indice = this.funcaoEspalhamento(palavra);
-			LinkedList<String> lista = this.tabelaEspalhamento.get(indice);
-			lista.add(palavra);
+	public void adiciona(Object objeto){
+		if(!this.contem(objeto)){
+			int indice = this.calculaIndiceDaTabela(objeto);
+			LinkedList<Object> lista = this.tabelaEspalhamento.get(indice);
+			lista.add(objeto);
 			this.totalDeElementos++;
 		}
 	}
-	private int calcularCodigoEspalhamento(String palavra) {
-			int somaCodigo= 1;
-			
-			for(int i = 0; i<palavra.length();i++){
-				somaCodigo =31*somaCodigo + palavra.toLowerCase().charAt(i);
-			}
-			return somaCodigo;
-	}
-	public int calculaIndiceDaTabela(String palavra) {
-		int codigoEspalhamento = Math.abs(calcularCodigoEspalhamento(palavra));
+	
+	public int calculaIndiceDaTabela(Object objeto) {
+		
+		int codigoEspalhamento = objeto.hashCode();
+			codigoEspalhamento =	Math.abs(codigoEspalhamento);
 		return codigoEspalhamento %this.tabelaEspalhamento.size();
 	}
 	public void remove(String palavra){
 		if (this.contem(palavra)) {
 			int indice = palavra.toLowerCase().charAt(0)%26;
-			List<String> lista = this.tabelaEspalhamento.get(indice);
+			List<Object> lista = this.tabelaEspalhamento.get(indice);
 			lista.remove(palavra);
 			this.totalDeElementos--;
 		}
 	}
-	public boolean contem (String palavra){
-		int indice =  palavra.toLowerCase().charAt(0)%26;
-		List<String> lista = this.tabelaEspalhamento.get(indice);
-		return lista.contains(palavra);
+	public boolean contem (Object objeto){
+		int indice = calculaIndiceDaTabela(objeto);
+		List<Object> lista = this.tabelaEspalhamento.get(indice);
+		return lista.contains(objeto);
 	}
 	
-	public List<String> pegaTodasPalavras(){
-		List<String> palavras = new ArrayList<String>();
+	public List<Object> pegaTodasPalavras(){
+		List<Object> objeto = new ArrayList<Object>();
 		for (int i = 0; i < this.tabelaEspalhamento.size(); i++) {
-			palavras.addAll(this.tabelaEspalhamento.get(i));
+			objeto.addAll(this.tabelaEspalhamento.get(i));
 		}
-			return palavras;
+			return objeto;
 	}
 
 	public int tamanho() {
@@ -67,21 +59,21 @@ public class ConjuntoEspalhamento {
 		}
 	}
 	private void redimensionarTabela(int novaCapacidade) {
-		List<String> backup = this.pegaTodasPalavras();
+		List<Object> backup = this.pegaTodasPalavras();
 		this.tabelaEspalhamento.clear();
 		
 		for(int i = 0;i< novaCapacidade;i++){
-			LinkedList<String> lista = new LinkedList<String>();
+			LinkedList<Object> lista = new LinkedList<Object>();
 			this.tabelaEspalhamento.add(lista);
 		}
-		for(String palavra :backup) {
-			this.adiciona(palavra);
+		for(Object objeto :backup) {
+			this.adiciona(objeto);
 		}
 	
 	}
 	public ConjuntoEspalhamento(){
 		for(int i = 0;i<26;i++){
-			LinkedList<String> lista = new LinkedList<String>();
+			LinkedList<Object> lista = new LinkedList<Object>();
 			tabelaEspalhamento.add(lista);
 		}
 		
